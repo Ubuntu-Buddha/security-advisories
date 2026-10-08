@@ -1,7 +1,7 @@
 # Fake "Careers" Page Pushing a Malicious "GAPI Update" Executable (Google Sites abuse)
 
 **Author:** Trygve Bundgaard — independent security researcher (GitHub: [@Ubuntu-Buddha](https://github.com/Ubuntu-Buddha))
-**Discovered:** 2026
+**Discovered:** 2026-01-29
 **Status:** Phishing / malware distribution. Malware identified before execution; reportable to the freelancing platform and to Google Sites abuse.
 **Severity:** High — social-engineers the target into downloading and running an attacker-supplied Windows executable
 **Type:** Fake-update malware via trusted-domain (Google Sites) abuse
@@ -19,8 +19,8 @@ leans entirely on the credibility of the `sites.google.com` domain.
 
 ## The lure
 
-1. The job posting links to `hxxps://sites[.]google[.]com/view/artes-project-careers/forms`.
-2. The page shows a fabricated error — `GAPI_AUTH_FAILED`, *"401 — Authentication credentials expired or invalid"*, *"Download and install the latest Google API Authentication update."*
+1. An Upwork job directed applicants to `hxxps://sites[.]google[.]com/view/artes-project-careers/forms`.
+2. The page shows a fabricated error — `GAPI_AUTH_FAILED`, *"401 - Authentication credentials expired or invalid"*, *"Download and install the latest Google API Authentication update."*
 3. A prominent button offers **"Download GAPI Update (.exe)"**.
 4. Social-engineering pressure: framed as a "known issue" with a "recommended solution," creating urgency and false authority.
 
@@ -38,7 +38,7 @@ get a hurried applicant to run the file.
 |-----------|-------|
 | Hosting page | `hxxps://sites[.]google[.]com/view/artes-project-careers/forms` |
 | Fake error strings | `GAPI_AUTH_FAILED`, `401 - Authentication credentials expired or invalid`, "Google API Authentication update" |
-| Payload | a downloadable Windows executable labeled **"GAPI Update (.exe)"** |
+| Payload | a downloadable Windows executable labeled **"GAPI Update (.exe)"** (not downloaded; no hash recorded) |
 | Delivery pattern | legitimate Google-domain page → fake error → fake-update `.exe` |
 
 ## Impact
@@ -65,7 +65,9 @@ Same objective as the repo-delivered backdoors (compromise a job-seeking
 developer) via a different channel — a fake update executable behind a
 trusted-looking Google URL. Abuse of Google Forms/Sites for malware and
 credential theft is well documented by multiple vendors; this is that pattern
-pointed at developer hiring.
+pointed at developer hiring. A similar fake "Google API" update lure was later
+documented by Huntress
+([August 2026](https://www.huntress.com/blog/defcon-phishing-google-doc-malware)).
 
 ---
 

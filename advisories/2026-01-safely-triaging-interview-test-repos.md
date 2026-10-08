@@ -29,7 +29,7 @@ worth searching for:
 |--------|---------|----------|
 | Malicious code in an app startup file → `Function.constructor` RCE | `npm run dev` / server start | [W3GLFun](2026-01-27-contagious-interview-w3glfun-rce.md) |
 | `.vscode/tasks.json` with `runOn: folderOpen` → `curl \| sh` | opening the folder in VS Code/Cursor | [IDE auto-run](2026-01-30-ide-autorun-rce-vscode-tasks.md) |
-| Runtime `Function.constructor` RCE with the C2 URL hidden in an env var | module load / hitting a route | [env-var variant](2026-01-29-env-var-runtime-rce-optu.md) |
+| Runtime `Function.constructor` RCE with the C2 URL hidden in an env var | server start (controller load) | [env-var variant](2026-01-29-env-var-runtime-rce-optu.md) |
 | Fake "careers" page → fake update `.exe` | downloading and running the file | [GAPI update](2026-fake-careers-page-gapi-update-exe.md) |
 
 Also search for (seen across related campaigns): GitHub Actions secret exfil
@@ -54,8 +54,8 @@ repos I declined on these signals alone):
 - **Evasive counterpart.** Dodges technical questions, won't discuss the code
   before you run it.
 - **Author that doesn't add up.** Commits attributed to a well-known developer
-  but **unsigned** (no GPG verification) and from someone not actually in the org
-  — git author spoofing. The displayed name is not proof of authorship.
+  but **unsigned** (no GPG verification) and from someone who isn't a public
+  member of the org — git author spoofing. The displayed name is not proof of authorship.
 
 Any one of these justifies slowing down; two or more justifies declining.
 
@@ -86,7 +86,7 @@ clone, no `npm install`, no opening the folder in an IDE.
 
 ## Hardening that neutralizes whole classes
 
-- **Keep VS Code Workspace Trust on** (`security.workspace.trust.enabled`) — Restricted Mode stops `tasks.json` auto-run.
+- **Turn Workspace Trust on — Cursor ships with it off** (`"security.workspace.trust.enabled": true`). Restricted Mode stops `tasks.json` auto-run.
 - **Verify commit signatures;** don't trust a displayed author name.
 - **Keep your daily driver clean** — do untrusted analysis on a machine (or VM) that holds no secrets.
 - **Never run an `.exe` or install prompt** that appears inside an application/interview flow, even on a trusted-looking domain.

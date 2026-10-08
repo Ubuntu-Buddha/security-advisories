@@ -2,7 +2,7 @@
 
 **Author:** Trygve Bundgaard — independent security researcher (GitHub: [@Ubuntu-Buddha](https://github.com/Ubuntu-Buddha))
 **Discovered:** 2026-01-27
-**Status:** Reported to GitHub Trust & Safety → repository removed after confirmed Terms-of-Service violation (2026-01-27)
+**Status:** Reported to GitHub Trust & Safety → GitHub found Terms-of-Service violations and "took appropriate action" against the account (2026-01-27)
 **Severity:** Critical — unauthenticated remote code execution on the developer's workstation
 **Type:** Social-engineering / supply-chain malware ("Contagious Interview" pattern)
 
@@ -10,14 +10,16 @@
 
 ## Summary
 
-While reviewing a "technical test" for a Web3 Developer role sourced through a
+While evaluating a "technical test" for a Web3 Developer role sourced through a
 freelancing platform, I found a **remote code execution backdoor** hidden in the
 project's error handler. The moment the application starts, it fetches
 JavaScript from a remote paste service and executes it with full Node.js
 privileges — enough to read and write any file, run any command, and steal
-wallet keys, SSH keys, and credentials. I caught it during a pre-run code
-review, so the backdoor never executed on my machine. I reported it
-to GitHub, which removed the repository.
+wallet keys, SSH keys, and credentials. I cloned it to my workstation. One
+`npm run dev`, run in another project folder, failed with `Missing script:
+"dev"`, so none of its code ran. I then read the source, found the backdoor,
+and deleted the clone. Post-incident checks found no sign that it executed. I
+reported it to GitHub, which took action against the account.
 
 ## The lure
 
@@ -78,7 +80,7 @@ dependency surface.
 
 | Indicator | Value |
 |-----------|-------|
-| Malicious repository | `github[.]com/TechPro-1/W3GLFun` (removed by GitHub) |
+| Malicious repository | `github[.]com/TechPro-1/W3GLFun` (GitHub took action against the account) |
 | Malicious org/account | `TechPro-1` |
 | First-stage (base64) | `aHR0cHM6Ly93d3cuanNvbmtlZXBlci5jb20vYi9IWTZN` |
 | Decoded payload URL | `hxxps://www[.]jsonkeeper[.]com/b/HY6M` |
@@ -93,8 +95,8 @@ is full compromise.
 
 ## Detection
 
-Scan any untrusted repo (do **not** clone the one above — it's gone, and you
-shouldn't re-arm it anyway):
+Scan any untrusted repo (do **not** clone the one above — GitHub has acted on
+it, and you shouldn't re-arm it anyway):
 
 ```bash
 # base64-encoded URLs hidden in source
@@ -114,11 +116,11 @@ grep -rln "axios.get\|fetch(" --include=*error* --include=*handler* .
 
 ## Disclosure timeline & outcome
 
-- **2026-01-27** — Identified during pre-run code review. Reported to **GitHub Trust & Safety** and to the freelancing platform.
+- **2026-01-27** — Cloned to my workstation. One `npm run dev`, run in another project folder, failed with `Missing script: "dev"`, so none of its code ran. Found the backdoor on reading the source, deleted the clone, and reported it to **GitHub Trust & Safety** and to the freelancing platform.
 - **2026-01-27** — GitHub Trust & Safety confirmed enforcement:
   > "Our review of the account named in your report has concluded. We have determined that one or more violations of GitHub's Terms of Service have occurred and have taken appropriate action in response."
-- The freelancing platform reviewed the report and stated it found no violation — a reminder that review standards differ across platforms.
-- **No compromise:** the backdoor never executed.
+- The freelancing platform reviewed the report twice and at first found no violation. About five days later its Trust & Safety team wrote that the user "may have shared malware" with me and recommended a virus scan, a password change, and two-step verification. A platform's first "no violation" is not a final verdict.
+- **No evidence of compromise:** I never ran `npm install` in the clone, so the `axios` package the backdoor needs was never installed there, and post-incident checks found no connections to the payload host, no suspicious processes, and no modified files.
 
 ## Campaign context
 

@@ -13,8 +13,12 @@ Developers — especially web3/crypto developers — are being targeted through 
 job interviews on freelancing and hiring platforms. The "technical test" is the
 delivery vehicle: you're asked to clone a repo, open it, run it, and "send
 screenshots." The code (or the page) compromises your machine the moment you
-cooperate. I analyzed a string of these; this guide is the repeatable method
-that caught every one **before any malicious code ran**.
+cooperate. I analyzed a string of these, and this guide is the repeatable
+method I built from them. There is no evidence that malicious code ran in any
+of them, but the first one (W3GLFun) was a near miss. I cloned it. One
+`npm run dev`, run in another project folder, failed with `Missing script:
+"dev"`, so none of its code ran. That is why this protocol never clones
+first.
 
 ## The delivery vectors seen in the wild
 
@@ -90,9 +94,12 @@ clone, no `npm install`, no opening the folder in an IDE.
 ## Reporting works
 
 These are worth reporting: in one case, after I reported the malicious repo to
-**GitHub Trust & Safety**, they confirmed a Terms-of-Service violation and
-removed it. Report repos to GitHub/Bitbucket, pages to Google/Vercel abuse, and
-the job to the hiring platform — it protects the next developer.
+**GitHub Trust & Safety**, they found a Terms-of-Service violation and took
+action against the account the same day. The hiring platform first found no
+violation, then about five days later told me the user may have shared malware,
+so don't treat a first "all clear" as final. Report repos to GitHub/Bitbucket,
+pages to Google/Vercel abuse, and the job to the hiring platform — it protects
+the next developer.
 
 ---
 

@@ -26,3 +26,11 @@ and copy.
 Report malware or vulnerabilities to me via my GitHub profile. For the web3
 projects I run, see each project's `SECURITY.md` for its disclosure policy and
 safe-harbor terms.
+
+## License
+
+The writeups in this repository are licensed under
+[Creative Commons Attribution 4.0 International (CC BY 4.0)](LICENSE),
+© 2026 Trygve Bundgaard. Malicious code, attacker messages, and platform
+emails quoted for analysis belong to their authors and are not covered by
+this license.

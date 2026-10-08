@@ -2,7 +2,7 @@
 
 **Author:** Trygve Bundgaard — independent security researcher (GitHub: [@Ubuntu-Buddha](https://github.com/Ubuntu-Buddha))
 **Discovered:** 2026
-**Status:** Phishing / malware distribution. Declined; reportable to the freelancing platform and to Google Sites abuse.
+**Status:** Phishing / malware distribution. Malware identified before execution; reportable to the freelancing platform and to Google Sites abuse.
 **Severity:** High — social-engineers the target into downloading and running an attacker-supplied Windows executable
 **Type:** Fake-update malware via trusted-domain (Google Sites) abuse
 

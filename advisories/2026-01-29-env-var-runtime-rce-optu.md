@@ -2,7 +2,7 @@
 
 **Author:** Trygve Bundgaard — independent security researcher (GitHub: [@Ubuntu-Buddha](https://github.com/Ubuntu-Buddha))
 **Discovered:** 2026-01-29
-**Status:** Identified during pre-run review of a repository delivered as an interview "test"; engagement declined, repo documented and reportable to GitHub Trust & Safety.
+**Status:** Malware identified before execution during pre-run review of a repository delivered as an interview "test"; repo documented and reportable to GitHub Trust & Safety.
 **Severity:** Critical — remote code execution with full Node.js `require()` access
 **Type:** Social-engineering / fake-interview malware ("Contagious Interview" pattern)
 

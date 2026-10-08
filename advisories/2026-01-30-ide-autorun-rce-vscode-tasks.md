@@ -2,7 +2,7 @@
 
 **Author:** Trygve Bundgaard — independent security researcher (GitHub: [@Ubuntu-Buddha](https://github.com/Ubuntu-Buddha))
 **Discovered:** 2026-01-30
-**Status:** Identified during pre-open review of two private repositories delivered as "interview tasks"; engagements declined, repos documented and reported. Reporting the payload infrastructure to the hosting provider is recommended.
+**Status:** Malware identified before execution during pre-open review of two private repositories delivered as "interview tasks"; repos documented and reported. Reporting the payload infrastructure to the hosting provider is recommended.
 **Severity:** Critical — remote code execution the moment the folder is opened, zero interaction
 **Type:** Social-engineering / supply-chain malware ("Contagious Interview" pattern)
 

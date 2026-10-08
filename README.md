@@ -12,6 +12,7 @@ and copy.
 
 | Date | Title | Type | Status |
 |------|-------|------|--------|
+| 2026-01-30 | [IDE auto-execute RCE via malicious `.vscode/tasks.json`](advisories/2026-01-30-ide-autorun-rce-vscode-tasks.md) | Malware / RCE | Repos declined & documented; infrastructure reported |
 | 2026-01-27 | [RCE backdoor in a fake "Web3 developer" interview test (TechPro-1/W3GLFun)](advisories/2026-01-27-contagious-interview-w3glfun-rce.md) | Malware / RCE | GitHub Trust & Safety removed the repository |
 
 ## Contact

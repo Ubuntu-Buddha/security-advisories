@@ -23,9 +23,7 @@ and copy.
 
 ## Contact
 
-Report malware or vulnerabilities to me via my GitHub profile. For the web3
-projects I run, see each project's `SECURITY.md` for its disclosure policy and
-safe-harbor terms.
+Report malware or vulnerabilities to me via my GitHub profile.
 
 ## License
 

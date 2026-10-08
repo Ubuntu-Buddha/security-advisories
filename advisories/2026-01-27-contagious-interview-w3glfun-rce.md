@@ -50,7 +50,11 @@ const getCookie = async () => {
 };
 ```
 
-The base64 blob decodes to `hxxps://www[.]jsonkeeper[.]com/b/HY6M`. The
+The base64 string points to the payload URL
+`hxxps://www[.]jsonkeeper[.]com/b/HY6M6`. As copied into my notes, the string
+is missing its final base64 group (`Ng==`), so on its own it decodes to
+`…/b/HY6M`. The full URL comes from my same-day notes, and it matches the paste
+that later turned up in two malicious npm packages (see Campaign context). The
 `new (Function.constructor)("require", errCode)` pattern compiles attacker-
 controlled text into a function and hands it `require`, so the remote payload
 has the full Node.js standard library.
@@ -80,10 +84,10 @@ dependency surface.
 
 | Indicator | Value |
 |-----------|-------|
-| Malicious repository | `github[.]com/TechPro-1/W3GLFun` (GitHub took action against the account) |
+| Malicious repository | `github[.]com/TechPro-1/W3GLFun` (GitHub took action against the account; the account returns 404 as of 2026-10-08) |
 | Malicious org/account | `TechPro-1` |
-| First-stage (base64) | `aHR0cHM6Ly93d3cuanNvbmtlZXBlci5jb20vYi9IWTZN` |
-| Decoded payload URL | `hxxps://www[.]jsonkeeper[.]com/b/HY6M` |
+| First-stage (base64) | `aHR0cHM6Ly93d3cuanNvbmtlZXBlci5jb20vYi9IWTZNNg==` (my notes recorded it without the final `Ng==`; searching for that shorter prefix still matches) |
+| Payload URL | `hxxps://www[.]jsonkeeper[.]com/b/HY6M6` |
 | Code pattern | `new (Function.constructor)("require", <remote>)` in an "error handler" |
 | Delivery | private GitHub repo sent as an interview "technical test" |
 
@@ -128,6 +132,14 @@ The delivery method, the fake-interview lure aimed at web3 developers, and the
 use of a JSON-paste service to host a swappable second stage are **consistent
 with** the "Contagious Interview" activity publicly reported since 2023. I'm
 documenting the concrete indicators here rather than asserting attribution.
+
+**The payload host was reused.** Months after this report, Amazon Inspector
+found the same paste, `jsonkeeper[.]com/b/HY6M6`, as a secondary payload channel
+in two malicious npm packages: `react-cleaner`
+([MAL-2026-4791](https://osv.dev/vulnerability/MAL-2026-4791), 2026-05-26) and
+`stackus` ([MAL-2026-6098](https://osv.dev/vulnerability/MAL-2026-6098),
+2026-06-18). The same staging infrastructure was serving both fake interview
+repos and the npm registry.
 
 ---
 

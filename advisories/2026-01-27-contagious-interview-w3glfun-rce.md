@@ -16,7 +16,7 @@ project's error handler. The moment the application starts, it fetches
 JavaScript from a remote paste service and executes it with full Node.js
 privileges — enough to read and write any file, run any command, and steal
 wallet keys, SSH keys, and credentials. I caught it during a pre-run code
-review, before `npm install`, so no code executed on my machine. I reported it
+review, so the backdoor never executed on my machine. I reported it
 to GitHub, which removed the repository.
 
 ## The lure
@@ -48,7 +48,7 @@ const getCookie = async () => {
 };
 ```
 
-The base64 blob decodes to `hxxps://www[.]jsonkeeper[.]com/b/HY6M6`. The
+The base64 blob decodes to `hxxps://www[.]jsonkeeper[.]com/b/HY6M`. The
 `new (Function.constructor)("require", errCode)` pattern compiles attacker-
 controlled text into a function and hands it `require`, so the remote payload
 has the full Node.js standard library.
@@ -81,7 +81,7 @@ dependency surface.
 | Malicious repository | `github[.]com/TechPro-1/W3GLFun` (removed by GitHub) |
 | Malicious org/account | `TechPro-1` |
 | First-stage (base64) | `aHR0cHM6Ly93d3cuanNvbmtlZXBlci5jb20vYi9IWTZN` |
-| Decoded payload URL | `hxxps://www[.]jsonkeeper[.]com/b/HY6M6` |
+| Decoded payload URL | `hxxps://www[.]jsonkeeper[.]com/b/HY6M` |
 | Code pattern | `new (Function.constructor)("require", <remote>)` in an "error handler" |
 | Delivery | private GitHub repo sent as an interview "technical test" |
 
@@ -118,7 +118,7 @@ grep -rln "axios.get\|fetch(" --include=*error* --include=*handler* .
 - **2026-01-27** — GitHub Trust & Safety confirmed enforcement:
   > "Our review of the account named in your report has concluded. We have determined that one or more violations of GitHub's Terms of Service have occurred and have taken appropriate action in response."
 - The freelancing platform reviewed the report and stated it found no violation — a reminder that review standards differ across platforms.
-- **No compromise:** the malware never executed; it was caught before `npm install`.
+- **No compromise:** the backdoor never executed.
 
 ## Campaign context
 

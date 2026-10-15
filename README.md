@@ -12,7 +12,7 @@ and copy.
 
 | Date | Title | Type | Status |
 |------|-------|------|--------|
-| 2026-10-15 | [Hex payload hidden in a fake font file, run by a `new Function` loader (coinbucket/dex-mvp)](advisories/2026-10-15-fake-font-hex-loader-dex-mvp.md) | Malware / RCE | Malware identified before execution by remote review; not yet reported |
+| 2026-10-15 | [Hex payload hidden in a fake font file, run by a `new Function` loader (coinbucket/dex-mvp)](advisories/2026-10-15-fake-font-hex-loader-dex-mvp.md) | Malware / RCE | Malware identified before execution by remote review; reported to GitLab and Upwork 2026-10-15, outcome pending |
 | 2026-01-30 | [IDE auto-execute RCE via malicious `.vscode/tasks.json`](advisories/2026-01-30-ide-autorun-rce-vscode-tasks.md) | Malware / RCE | Malware identified before execution; one of the two repos reported to GitHub; both accounts now 404 |
 | 2026-01-29 | [Runtime RCE backdoor hidden in an environment variable (Optu-Consulting)](advisories/2026-01-29-env-var-runtime-rce-optu.md) | Malware / RCE | Malware identified before execution; account and repo now 404 |
 | 2026-01-29 | [Fake "careers" page pushing a malicious "GAPI Update" .exe (Google Sites abuse)](advisories/2026-fake-careers-page-gapi-update-exe.md) | Malware / phishing | Malware identified before execution; reportable to platform & Google |

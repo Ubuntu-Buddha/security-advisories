@@ -2,7 +2,7 @@
 
 **Author:** Trygve Bundgaard — independent security researcher (GitHub: [@Ubuntu-Buddha](https://github.com/Ubuntu-Buddha))
 **Discovered:** 2026-10-15
-**Status:** Malware identified before execution by remote, read-only review. No repository file was cloned, downloaded, installed, opened in an IDE or run; only API metadata was fetched. Not yet reported to GitLab.
+**Status:** Malware identified before execution by remote, read-only review. No repository file was cloned, downloaded, installed, opened in an IDE or run; only API metadata was fetched. Reported to GitLab Trust & Safety and to Upwork on 2026-10-15; outcome pending.
 **Severity:** Critical — arbitrary code execution in Node.js
 **Type:** Developer-targeted malware delivered through a freelancing platform
 
@@ -149,7 +149,7 @@ example with `file --mime-type` or `head -c 64 <file> | xxd`.
 
 - **2026-10-15:** reviewed remotely (the repo arrived through Upwork); loader
   and fake font identified.
-- **Reports:** not yet sent.
+- **2026-10-15:** reported to GitLab Trust & Safety and to Upwork.
 
 ## Campaign context
 

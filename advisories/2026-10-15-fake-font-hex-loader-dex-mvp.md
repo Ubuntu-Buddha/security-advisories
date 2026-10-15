@@ -2,7 +2,7 @@
 
 **Author:** Trygve Bundgaard — independent security researcher (GitHub: [@Ubuntu-Buddha](https://github.com/Ubuntu-Buddha))
 **Discovered:** 2026-10-15
-**Status:** Malware identified before execution by remote, read-only review. No repository file was cloned, downloaded, installed, opened in an IDE or run; only API metadata was fetched. Reported to GitLab Trust & Safety and to Upwork on 2026-10-15; outcome pending.
+**Status:** Malware identified before execution by remote, read-only review. No repository file was cloned, downloaded, installed, opened in an IDE or run. The code was read in GitLab's web view; only API metadata was saved locally. Reported to GitLab (abuse report) and to Upwork on 2026-10-15; outcome pending.
 **Severity:** Critical — arbitrary code execution in Node.js
 **Type:** Developer-targeted malware delivered through a freelancing platform
 
@@ -43,14 +43,14 @@ new Function('require','module','exports','__filename','__dirname', src)(
 );
 ```
 
-I checked this quote against GitLab's file view on 2026-10-15.
+I compared this quote by eye with GitLab's file view on 2026-10-15; whitespace may differ.
 
 | Step | What happens |
 |------|--------------|
 | `readFileSync(… 'fa-brands-regular.woff2', 'utf8')` | Reads the "font" as text. The path resolves to `webfonts/` at the repo root |
-| `.replace(/[^0-9a-f]/gi, '')` | Strips every non-hex character. Needed because Node's hex decoder stops at the first non-hex character |
+| `.replace(/[^0-9a-f]/gi, '')` | Strips every non-hex character, so the file can carry line breaks or filler. Without it, Node's hex decoder would stop at the first non-hex character |
 | `Buffer.from(hex, 'hex')` | Turns the hex back into a source string |
-| `new Function('require', 'module', …, src)(…)` | Compiles that string with parameters named `require`, `module`, `exports`, `__filename` and `__dirname`, then calls it with the loader module's own `require`, `module`, `exports`, `__filename` and `__dirname`. The payload can load any Node module, including `fs`, `child_process` and the network modules, so it can run anything Node can |
+| `new Function('require', 'module', …, src)(…)` | Compiles that string with parameters named `require`, `module`, `exports`, `__filename` and `__dirname`, then calls it with the loader module's own `require`, `module`, `exports`, `__filename` and `__dirname`. The payload can load any built-in module (including `fs`, `child_process` and the network modules) or any installed package, and can replace the module's exports, so it can do anything Node can with the privileges of the user running it |
 
 **The "font":** a real WOFF2 file is binary and starts with the 4-byte
 signature `wOF2`. This one is 94,839 bytes of text that the loader treats as
@@ -149,7 +149,7 @@ example with `file --mime-type` or `head -c 64 <file> | xxd`.
 
 - **2026-10-15:** reviewed remotely (the repo arrived through Upwork); loader
   and fake font identified.
-- **2026-10-15:** reported to GitLab Trust & Safety and to Upwork.
+- **2026-10-15:** reported to GitLab (abuse report) and to Upwork.
 
 ## Campaign context
 

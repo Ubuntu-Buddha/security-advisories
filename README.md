@@ -12,6 +12,7 @@ and copy.
 
 | Date | Title | Type | Status |
 |------|-------|------|--------|
+| 2026-10-23 | [Launch gate bypasses in the StrangerDanger Claude Code plugin v0.1.0 (GHSA-w42w-fc6x-88wr)](advisories/2026-10-23-stranger-danger-launch-gate-bypass.md) | Vulnerability / security-tool bypass | Found in the maintainer's own review; patched in v0.1.1 (keep Monitor denied; see advisory); GHSA published 2026-10-23; CVE requested, none assigned as of 2026-10-30 |
 | 2026-10-15 | [Hex payload hidden in a fake font file, run by a `new Function` loader (coinbucket/dex-mvp)](advisories/2026-10-15-fake-font-hex-loader-dex-mvp.md) | Malware / RCE | Malware identified before execution by remote review; reported to GitLab and Upwork 2026-10-15, outcome pending |
 | 2026-01-30 | [IDE auto-execute RCE via malicious `.vscode/tasks.json`](advisories/2026-01-30-ide-autorun-rce-vscode-tasks.md) | Malware / RCE | Malware identified before execution; one of the two repos reported to GitHub; both accounts now 404 |
 | 2026-01-29 | [Runtime RCE backdoor hidden in an environment variable (Optu-Consulting)](advisories/2026-01-29-env-var-runtime-rce-optu.md) | Malware / RCE | Malware identified before execution; account and repo now 404 |

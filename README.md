@@ -1,12 +1,13 @@
 # Security Advisories
 
-Coordinated-disclosure and threat-analysis writeups by **Trygve Bundgaard**
+Threat-analysis and vulnerability-disclosure writeups by **Trygve Bundgaard**
 (GitHub: [@Ubuntu-Buddha](https://github.com/Ubuntu-Buddha)).
 
-Defensive security research: malware targeting software developers, and
-vulnerability disclosure on web3 / Solana / EVM platforms. All indicators of
-compromise below are **defanged** (`hxxp`, `[.]`) so this page is safe to read
-and copy.
+Defensive security research: malware targeting software developers and
+vulnerabilities in my own AI-agent tooling (a Claude Code plugin). I also
+work on vulnerability disclosure for web3 / Solana / EVM platforms; no such
+writeup is published here yet. All indicators of compromise below are **defanged**
+(`hxxp`, `[.]`) so this page is safe to read and copy.
 
 ## Advisories
 
